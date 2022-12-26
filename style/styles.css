@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Monda:wght@400;700&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
+@import "./normalize.css";
+/* @import "./adaptive.css"; */
+
+
+
+:root {
+  --color-light: #ffffff;
+  --color-green: #a8d2a5;
+  --color-blue: #acd4e1;
+  --color-red: #d16666;
+  --color-dark: #000000;
+  --color-lightBlue: #c8e3ec;
+  --color-darkBlue: #acd4e1;
+}
+
+body {
+  font-family: "Monda", sans-serif;
+}
+
+.page {
+  max-width: 92vw;
+  width: 100%;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  padding-top: 30px;
+  margin: 0;
+  text-transform: capitalize;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  letter-spacing: 10px;
+  color: var(--color-dark);
+}
+/* ===Body=== */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  box-sizing: border-box;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 100px;
+}
+
+.form-input,
+.form-description {
+  background-color: var(--color-green);
+  border: 1px solid transparent;
+  height: 6vh;
+  margin-bottom: 26px;
+  font-size: 18px;
+  color: #000000;
+  padding-left: 15px;
+  width: 100%;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-input:hover,
+.form-description:hover {
+  background-color: #a8e1a4;
+}
+/*
+scss => darken(var(--color-green), 0.9)
+*/
+
+.form-btn-add-task {
+  width: 30vw;
+  height: 6vh;
+  border: 1px solid transparent;
+  background: linear-gradient(90deg, #a8d2a5 1%, #acd4e1 115.2%);
+  border-radius: 25px;
+  cursor: pointer;
+}
+.button:hover {
+  transition: all 0.2s;
+  box-shadow: 0px 4px 4px #acd4e1;
+}
+.button:active {
+  background: linear-gradient(90deg, #aad9a7 0%, #b4e0ee 115.2%);
+}
+
+ul.list {
+  list-style: none;
+  padding: 0;
+  margin-top: -13px;
+}
+
+.list-item {
+  display: flex;
+  padding-top: 20px;
+  flex-direction: column;
+}
+.list-item-main{
+   padding-top: 10px;
+   display: flex;
+   flex-direction: column;
+}
+.main-icons {
+ position: relative;
+}
+
+.list-item-task {
+  border: none;
+  outline: none;
+  padding-left: 30px;
+  height: 31px;
+  background-color: #a5d2d238;
+  border-radius:5px;
+}
+.list-item-task:hover{
+   background-color: #0dc3c338;
+}
+
+.list-item-description {
+  border: none;
+  outline: none;
+  border-top: 2px solid black;
+  margin: 0;
+  padding-left: 30px;
+  height: 31px;
+  background-color: #a5d2d238;
+  border-radius:5px;
+}
+
+.bi-circle,
+.bi-check-circle {
+   position: absolute;
+}
+
+.bi-check-circle {
+  color: #1ebc4b;
+}
+
+/* .bi-check-circle:active {
+  color: #00c237;
+} */
+
+.bi-pen {
+   position: absolute;
+   right: 0;
+  color: #156b2d;
+  padding-right: 30px;
+}
+.bi-pen:hover{
+   color:rgb(0, 191, 0);
+}
+.bi-pen:active{
+   color:rgb(0, 212, 0);
+}
+.bi-trash3 {
+   right: 0;
+   position: absolute;
+  color: var(--color-red);
+}
+.bi-trash3:active{
+   color: rgb(165, 0, 0);
+}
+.bi-trash3:hover{
+   color: rgb(231, 10, 10);
+}
+
+.checkOn{
+   text-decoration: line-through;
+   color: gray;
+   background-color: #a5d2d238;
+   border-radius: 5px;
+ }
+
+footer {
+  margin-top: auto;
+  background-color: #acd4e1;
+  width: 100%;
+  height: 51px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  font-size: 25px;
+  color: rgb(23, 23, 23);
+}
+
+@media (max-width: 475px) or (orientation: portrait) {
+  .page {
+    padding: 0 15px;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  .container{
+   min-height: 83vh;
+  }
+  .form {
+    padding-top: 15px;
+  }
+  .form-btn-add-task {
+    min-width: 90%;
+    transition: width 0.5s;
+  }
+  .ul.list {
+    margin-top: 20px;
+  }
+  .bi-check-circle,
+  .bi-circle,
+  .bi-pen,
+  .bi-trash3 {
+    font-size: 20px;
+  }
+  .form-description {
+    height: 80px;
+  }
+  footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .main-container {
+    width: 100%;
+  }
+}
+@media (max-width: 320px) or (orientation: portrait) {
+   .container{
+      min-height: 92vh;
+     }
+
+     footer {
+      display: flex;
+      flex-direction: row;
+    }
+}

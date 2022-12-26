@@ -1,0 +1,52 @@
+
+@media (max-width: 475px) or (orientation: portrait) {
+   .page {
+     padding: 0 15px;
+   }
+   h1 {
+     font-size: 28px;
+   }
+   .container{
+    min-height: 83vh;
+   }
+   .form {
+     padding-top: 15px;
+   }
+   .form-btn-add-task {
+     min-width: 90%;
+     transition: width 0.5s;
+   }
+   .ul.list {
+     margin-top: 20px;
+   }
+   .bi-check-circle,
+   .bi-circle,
+   .bi-pen,
+   .bi-trash3 {
+     font-size: 20px;
+   }
+   .form-description {
+     height: 80px;
+   }
+   footer {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     padding: 0 10px 0 10px;
+   }
+ }
+ 
+ @media screen and (orientation: portrait) {
+   .main-container {
+     width: 100%;
+   }
+ }
+ @media (max-width: 320px) or (orientation: portrait) {
+    .container{
+       min-height: 92vh;
+      }
+      footer {
+       display: flex;
+       flex-direction: row;
+     }
+ }

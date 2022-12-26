@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style/styles.css" />
+    <title>todo-list-v4</title>
+  </head>
+  <body>
+    <div class="page" style="background-image: url('/img/bg.png')">
+      <header>
+        <h1>my tasks</h1>
+      </header>
+      <div class="container">
+        <form class="form" id="form">
+          <input
+            type="text"
+            class="form-input"
+            placeholder="Title"
+            id="taskInput"
+          />
+          <textarea
+            id="taskDescr"
+            rows="4"
+            cols="50"
+            class="form-description"
+            placeholder="Description"
+          ></textarea>
+          <button class="form-btn-add-task button" id="add">Add</button>
+        </form>
+        <ul class="list" id="tasksList">
+          <!-- <li class="list-item" key=${task.id}>
+            <div class="list-item-main">
+                <a href="#" class="main-icons">
+                  <i class="bi-check-circle hidden" id="check-circle"></i>
+                  <i class="bi-circle" id="circle1"></i>
+                  <i class="bi-pen" id="taskEdit" onclick="taskEdit(${task.id})></i>
+                  <i class="bi-trash3 " onclick="taskDelete(${task.id})"></i>
+               </a>
+               <input type="text"
+               placeholder="empty" class="list-item-task" id="tasks-input-${task.id}" value="${task.title}">
+               <input type="text"
+               placeholder="empty" class="list-item-description" id="tasks-descr-${task.id}" value="${task.description}">
+            </div>
+          </li> -->
+        </ul>
+      </div>
+
+      <footer>
+        <a class="info" href="#" onclick="alert('info')"
+          ><i class="bi bi-info-circle"></i
+        ></a>
+        <a class="share" href="#" onclick="alert('share')"
+          ><i class="bi bi-share"></i
+        ></a>
+        <a class="format" href="#" onclick="alert('format')"
+          ><i class="bi bi-code-square"></i
+        ></a>
+        <a class="sort" href="#" onclick="alert('sort')"
+          ><i class="bi bi-filter"></i
+        ></a>
+        <a class="trash" href="#" onclick="alert('trash')"
+          ><i class="bi bi-trash2"></i
+        ></a>
+      </footer>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
