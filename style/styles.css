@@ -3,8 +3,6 @@
 @import "./normalize.css";
 /* @import "./adaptive.css"; */
 
-
-
 :root {
   --color-light: #ffffff;
   --color-green: #a8d2a5;
@@ -111,13 +109,13 @@ ul.list {
   padding-top: 20px;
   flex-direction: column;
 }
-.list-item-main{
-   padding-top: 10px;
-   display: flex;
-   flex-direction: column;
+.list-item-main {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .main-icons {
- position: relative;
+  position: relative;
 }
 
 .list-item-task {
@@ -126,11 +124,11 @@ ul.list {
   padding-left: 30px;
   height: 31px;
   background-color: #a5d2d238;
-  border-radius:5px;
+  border-radius: 5px;
 }
-.list-item-task:hover{
-   background-color: #0dc3c338;
-}
+/* .list-item-task:hover {
+  background-color: #0dc3c338;
+} */
 
 .list-item-description {
   border: none;
@@ -140,12 +138,12 @@ ul.list {
   padding-left: 30px;
   height: 31px;
   background-color: #a5d2d238;
-  border-radius:5px;
+  border-radius: 5px;
 }
 
 .bi-circle,
 .bi-check-circle {
-   position: absolute;
+  position: absolute;
 }
 
 .bi-check-circle {
@@ -157,35 +155,38 @@ ul.list {
 } */
 
 .bi-pen {
-   position: absolute;
-   right: 0;
+  position: absolute;
+  right: 0;
   color: #156b2d;
   padding-right: 30px;
 }
-.bi-pen:hover{
-   color:rgb(0, 191, 0);
+.bi-pen:hover {
+  color: rgb(0, 191, 0);
 }
-.bi-pen:active{
-   color:rgb(0, 212, 0);
+.bi-pen:active {
+  color: rgb(0, 212, 0);
 }
 .bi-trash3 {
-   right: 0;
-   position: absolute;
+  right: 0;
+  position: absolute;
   color: var(--color-red);
 }
-.bi-trash3:active{
-   color: rgb(165, 0, 0);
+.bi-trash3:active {
+  color: rgb(165, 0, 0);
 }
-.bi-trash3:hover{
-   color: rgb(231, 10, 10);
+.bi-trash3:hover {
+  color: rgb(231, 10, 10);
 }
 
-.checkOn{
-   text-decoration: line-through;
-   color: gray;
-   background-color: #a5d2d238;
-   border-radius: 5px;
- }
+.checkOn {
+  text-decoration: line-through;
+  color: gray;
+  background-color: #a5d2d238;
+  border-radius: 5px;
+}
+.checkEdit{
+   background-color: #16a4b138;
+}
 
 footer {
   margin-top: auto;
@@ -213,8 +214,8 @@ a {
   h1 {
     font-size: 28px;
   }
-  .container{
-   min-height: 83vh;
+  .container {
+    min-height: 83vh;
   }
   .form {
     padding-top: 15px;
@@ -249,12 +250,12 @@ a {
   }
 }
 @media (max-width: 320px) or (orientation: portrait) {
-   .container{
-      min-height: 92vh;
-     }
+  .container {
+    min-height: 92vh;
+  }
 
-     footer {
-      display: flex;
-      flex-direction: row;
-    }
+  footer {
+    display: flex;
+    flex-direction: row;
+  }
 }
