@@ -30,8 +30,6 @@ function addItem(event) {
 //validation +
   if (taskTitle.value === "" || taskDescription.value === "") {
     alert("field is empty");
-  } else if (taskTitle.length < 10 || taskDescription.length < 10) {
-   alert("need to enter more characters");
   } else {
     event.preventDefault();
 

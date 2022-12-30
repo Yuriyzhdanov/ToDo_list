@@ -160,11 +160,11 @@ ul.list {
   color: #156b2d;
   padding-right: 30px;
 }
-.bi-pen:hover {
-  color: rgb(0, 191, 0);
+.bi-pen:hover{
+   color:rgb(0, 191, 0);
 }
-.bi-pen:active {
-  color: rgb(0, 212, 0);
+.bi-pen:active{
+   color:rgb(0, 212, 0);
 }
 .bi-trash3 {
   right: 0;
@@ -178,15 +178,12 @@ ul.list {
   color: rgb(231, 10, 10);
 }
 
-.checkOn {
-  text-decoration: line-through;
-  color: gray;
-  background-color: #a5d2d238;
-  border-radius: 5px;
-}
-.checkEdit{
-   background-color: #16a4b138;
-}
+.checkOn{
+   text-decoration: line-through;
+   color: gray;
+   background-color: #a5d2d238;
+   border-radius: 5px;
+ }
 
 footer {
   margin-top: auto;
