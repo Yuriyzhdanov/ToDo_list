@@ -18,7 +18,7 @@ body {
 }
 
 .page {
-  max-width: 92vw;
+  max-width: 82vw;
   width: 100%;
   margin: 0 auto;
   background-repeat: no-repeat;
@@ -41,6 +41,11 @@ h1 {
   font-size: 48px;
   letter-spacing: 10px;
   color: var(--color-dark);
+}
+
+button{
+   border:none;
+   background:transparent;
 }
 /* ===Body=== */
 .container {
@@ -83,8 +88,8 @@ scss => darken(var(--color-green), 0.9)
 */
 
 .form-btn-add-task {
-  width: 30vw;
-  height: 6vh;
+  width: 20vw;
+  height: 4vh;
   border: 1px solid transparent;
   background: linear-gradient(90deg, #a8d2a5 1%, #acd4e1 115.2%);
   border-radius: 25px;
@@ -115,7 +120,7 @@ ul.list {
   flex-direction: column;
 }
 .main-icons {
-  position: relative;
+   position: relative;
 }
 
 .list-item-task {
@@ -126,9 +131,12 @@ ul.list {
   background-color: #a5d2d238;
   border-radius: 5px;
 }
-/* .list-item-task:hover {
-  background-color: #0dc3c338;
-} */
+
+.list-item-task--done {
+   text-decoration: line-through;
+   color: gray;
+   background-color: #a5d2d238;
+}
 
 .list-item-description {
   border: none;
@@ -141,18 +149,14 @@ ul.list {
   border-radius: 5px;
 }
 
-.bi-circle,
-.bi-check-circle {
-  position: absolute;
+.bi-circle{
+   position: absolute;
 }
 
 .bi-check-circle {
-  color: #1ebc4b;
+   position: absolute;
+   color: #22cb52;
 }
-
-/* .bi-check-circle:active {
-  color: #00c237;
-} */
 
 .bi-pen {
   position: absolute;
@@ -178,12 +182,16 @@ ul.list {
   color: rgb(231, 10, 10);
 }
 
-.checkOn{
+/* .checkOn{
    text-decoration: line-through;
    color: gray;
    background-color: #a5d2d238;
    border-radius: 5px;
- }
+ } */
+ 
+ .checkEdit{
+   background-color: #16a4b138;
+}
 
 footer {
   margin-top: auto;
@@ -204,6 +212,17 @@ a {
   color: rgb(23, 23, 23);
 }
 
+.bi-x-circle{
+   font-size: 20px;
+color:var(--color-red);
+cursor: pointer;
+}
+.bi-x-circle:active{
+   color: red;
+}
+
+
+/* 
 @media (max-width: 475px) or (orientation: portrait) {
   .page {
     padding: 0 15px;
@@ -255,4 +274,4 @@ a {
     display: flex;
     flex-direction: row;
   }
-}
+} */

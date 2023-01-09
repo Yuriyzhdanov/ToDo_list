@@ -11,6 +11,7 @@
     <div class="page" style="background-image: url('/img/bg.png')">
       <header>
         <h1>my tasks</h1>
+       
       </header>
       <div class="container">
         <form class="form" id="form">
@@ -21,27 +22,28 @@
             id="taskInput"
           />
           <textarea
-            id="taskDescr"
+            id="taskDescription"
             rows="4"
             cols="50"
             class="form-description"
             placeholder="Description"
           ></textarea>
           <button class="form-btn-add-task button" id="add">Add</button>
+          <button><i class="bi-x-circle" data-action="resetAll" id="resetAll" ></i></button>
         </form>
         <ul class="list" id="tasksList">
           <!-- <li class="list-item" key=${task.id}>
             <div class="list-item-main">
                 <a href="#" class="main-icons">
-                  <i class="bi-check-circle hidden" id="check-circle"></i>
-                  <i class="bi-circle" id="circle1"></i>
-                  <i class="bi-pen" id="taskEdit" onclick="taskEdit(${task.id})></i>
-                  <i class="bi-trash3 " onclick="taskDelete(${task.id})"></i>
+                  <i class="bi-check-circle"></i>
+                  <i class="bi-circle"></i>
+                  <i class="bi-pen"></i>
+                  <i class="bi-trash3"></i>
                </a>
                <input type="text"
-               placeholder="empty" class="list-item-task" id="tasks-input-${task.id}" value="${task.title}">
+               placeholder="empty" class="list-item-task" id="taskInput">
                <input type="text"
-               placeholder="empty" class="list-item-description" id="tasks-descr-${task.id}" value="${task.description}">
+               placeholder="empty" class="list-item-description" id="taskDescription">
             </div>
           </li> -->
         </ul>
@@ -60,7 +62,7 @@
         <a class="sort" href="#" onclick="alert('sort')"
           ><i class="bi bi-filter"></i
         ></a>
-        <a class="trash" href="#" onclick="alert('trash')"
+        <a class="trash" href="#" onclick="alert('reset list')"
           ><i class="bi bi-trash2"></i
         ></a>
       </footer>
