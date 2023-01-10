@@ -43,10 +43,6 @@ h1 {
   color: var(--color-dark);
 }
 
-button{
-   border:none;
-   background:transparent;
-}
 /* ===Body=== */
 .container {
   display: flex;
@@ -212,14 +208,15 @@ a {
   color: rgb(23, 23, 23);
 }
 
-.bi-x-circle{
+/* .bi-x-circle{
+   position: absolute;
    font-size: 20px;
 color:var(--color-red);
 cursor: pointer;
 }
 .bi-x-circle:active{
    color: red;
-}
+} */
 
 
 /* 
