@@ -98,6 +98,12 @@ scss => darken(var(--color-green), 0.9)
 .button:active {
   background: linear-gradient(90deg, #aad9a7 0%, #b4e0ee 115.2%);
 }
+.form-btn-reset-task{ 
+ margin-top: 20px;
+ font-size: 25px;
+ border:none;
+ background-color:transparent;
+}
 
 ul.list {
   list-style: none;
@@ -116,7 +122,7 @@ ul.list {
   flex-direction: column;
 }
 .main-icons {
-   position: relative;
+  position: relative;
 }
 
 .list-item-task {
@@ -129,9 +135,9 @@ ul.list {
 }
 
 .list-item-task--done {
-   text-decoration: line-through;
-   color: gray;
-   background-color: #a5d2d238;
+  text-decoration: line-through;
+  color: gray;
+  background-color: #a5d2d238;
 }
 
 .list-item-description {
@@ -145,13 +151,13 @@ ul.list {
   border-radius: 5px;
 }
 
-.bi-circle{
-   position: absolute;
+.bi-circle {
+  position: absolute;
 }
 
 .bi-check-circle {
-   position: absolute;
-   color: #22cb52;
+  position: absolute;
+  color: #22cb52;
 }
 
 .bi-pen {
@@ -160,11 +166,11 @@ ul.list {
   color: #156b2d;
   padding-right: 30px;
 }
-.bi-pen:hover{
-   color:rgb(0, 191, 0);
+.bi-pen:hover {
+  color: rgb(0, 191, 0);
 }
-.bi-pen:active{
-   color:rgb(0, 212, 0);
+.bi-pen:active {
+  color: rgb(0, 212, 0);
 }
 .bi-trash3 {
   right: 0;
@@ -184,9 +190,9 @@ ul.list {
    background-color: #a5d2d238;
    border-radius: 5px;
  } */
- 
- .checkEdit{
-   background-color: #16a4b138;
+
+.checkEdit {
+  background-color: #16a4b138;
 }
 
 footer {
@@ -208,16 +214,13 @@ a {
   color: rgb(23, 23, 23);
 }
 
-/* .bi-x-circle{
-   position: absolute;
-   font-size: 20px;
+.bi-x-circle{
 color:var(--color-red);
 cursor: pointer;
 }
 .bi-x-circle:active{
    color: red;
-} */
-
+}
 
 /* 
 @media (max-width: 475px) or (orientation: portrait) {
