@@ -1,17 +1,16 @@
 {
-   "tasks" : [
-       {
-       "id": 122143423,
-       "title": "titleTask",
-       "description": "descriptionTask",
-       "checked": false
-   },
-   { 
+  "tasks": [
+    {
+      "id": 122143423,
+      "title": "titleTask",
+      "description": "descriptionTask",
+      "checked": false
+    },
+    {
       "id": 122133423,
-   "title": "titleTask1",
-   "description": "descriptionTask1",
-   "checked": false
-}
-   ]
-
-}
+      "title": "titleTask1",
+      "description": "descriptionTask1",
+      "checked": false
+    }
+  ]
+} 
