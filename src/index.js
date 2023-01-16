@@ -1,5 +1,5 @@
 import isValidTextFields from "./isValidTextFields.js";
-import tasks from "tasks.json"
+
 
 
 const form = document.querySelector("#form");
@@ -15,21 +15,23 @@ tasksList.addEventListener("click", editTask);
 tasksList.addEventListener("click", deleteTask);
 resetAll.addEventListener("click", deleteAllTasks);
 
-// const tasks = [
-//    { id: 122143423,
-//    title: "titleTask",
-//    description: "descriptionTask",
-//    checked: false,}
-// ];
-fetch('http://127.0.0.8080/tasks.json')
-  .then((response) => response.json())
-  .then((data) => console.log(data));
+
+//  fetch('http://localhost:3000/tasks')
+// .then(res =>  res.json())
+// .then(data =>
+//    document.querySelector("#tasksList").innerHTML = 
+//    JSON.stringify(data));
 
 
-// console.log('JSON.parse(tasks)', JSON.parse(tasks));
+const tasks = [
+   {
+      id: 122345,
+    title:"test1",
+    description: "test2",
+    checked: false,
+   }
+];
 
-// fetch(tasks)
-// console.log("tasks",tasks);
 renderTask();
 
 
@@ -42,7 +44,7 @@ function addTask(event) {
     description: descriptionInput.value,
     checked: false,
   };
-// console.log(newTask);
+console.log(newTask);
 
   tasks.push(newTask);
 
@@ -83,9 +85,6 @@ function doneTask(event) {
   
     currentTask.checked = !currentTask.checked;
   
-// console.log("currentTask.checked",currentTask.checked);
-// console.log('tasks',tasks);
-
   const taskTitle = parentNode.querySelector("#taskInput");
   taskTitle.classList.toggle("list-item-task--done");
 
@@ -98,17 +97,42 @@ function doneTask(event) {
 
 function editTask(event) {
   if (event.target.dataset.action === "edit") {
+
     const parentNode = event.target.closest(".list-item");
     const inputEdit = parentNode.querySelector("#taskInput");
+
     inputEdit.toggleAttribute("readonly");
     inputEdit.classList.toggle("checkEdit");
 
+   const descriptionEdit = parentNode.querySelector("#taskDescription");
 
-
-    const descriptionEdit = parentNode.querySelector("#taskDescription");
     descriptionEdit.toggleAttribute("readonly");
     descriptionEdit.classList.toggle("checkEdit");
+
+    parentNode.querySelector(".list-item-task").value
+    parentNode.querySelector(".list-item-description").value
+
+    tasks.forEach(element => {
+      console.log(element);
+      if (parseInt(parentNode.id) === element.id) {
+          element.title = parentNode.querySelector('.list-item-task').value;
+          element.description = parentNode.querySelector('.list-item-description').value;
+          element.checked = parentNode.querySelectorAll('.bi-check-circle')[1] != undefined;
+      }
+      console.log('tasks', tasks);
+      
+  });
+  //   for (let i = 0; i < tasks.length; i++) {
+  //     if (parseInt(parentNode.id) === tasks[i].id) {
+  //         tasks[i].title = parentNode.querySelector('.list-item-task').value;
+  //         tasks[i].description = parentNode.querySelector('.list-item-description').value;
+  //         tasks[i].checked = parentNode.querySelectorAll('.bi-check-circle')[1] != undefined;
+  //         console.log("tseg");
+  //     }
+  // }
   }
+
+
 }
 
 function deleteTask(event) {
@@ -124,4 +148,5 @@ function deleteTask(event) {
 
 function deleteAllTasks() {
   tasksList.innerHTML = "";
+  tasks = [];
 }
