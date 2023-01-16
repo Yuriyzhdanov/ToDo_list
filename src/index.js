@@ -1,4 +1,6 @@
 import isValidTextFields from "./isValidTextFields.js";
+import tasks from "tasks.json"
+
 
 const form = document.querySelector("#form");
 const titleInput = document.querySelector("#taskInput");
@@ -13,31 +15,47 @@ tasksList.addEventListener("click", editTask);
 tasksList.addEventListener("click", deleteTask);
 resetAll.addEventListener("click", deleteAllTasks);
 
-let tasks = [];
+// const tasks = [
+//    { id: 122143423,
+//    title: "titleTask",
+//    description: "descriptionTask",
+//    checked: false,}
+// ];
+fetch('http://127.0.0.8080/tasks.json')
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+
+
+// console.log('JSON.parse(tasks)', JSON.parse(tasks));
+
+// fetch(tasks)
+// console.log("tasks",tasks);
+renderTask();
+
 
 function addTask(event) {
   event.preventDefault();
 
-  let titleTask = titleInput.value;
-  let descriptionTask = descriptionInput.value;
-
   const newTask = {
     id: Date.now(),
-    title: titleTask,
-    description: descriptionTask,
+    title: titleInput.value,
+    description: descriptionInput.value,
     checked: false,
   };
+// console.log(newTask);
 
   tasks.push(newTask);
 
-  renderTask(newTask);
+  renderTask();
 
   titleInput.value = "";
   descriptionInput.value = "";
 }
 
-function renderTask(task) {
-  const renderHTML = `
+function renderTask() {
+   tasksList.innerHTML="";
+   tasks.forEach(function(task){
+   const renderHTML = `
   <li id="${task.id}" class="list-item" >
        <div class="list-item-main">
              <a href="#" class="main-icons">
@@ -52,16 +70,21 @@ function renderTask(task) {
      placeholder="empty" class="list-item-description" id="taskDescription" value="${task.description}" readonly >
        </div>
   </li>`;
-  tasksList.insertAdjacentHTML("beforeend", renderHTML);
-}
+  tasksList.innerHTML += renderHTML;
+ })
+};
 
 function doneTask(event) {
   if (event.target.dataset.action !== "done") return;
   const parentNode = event.target.closest(".list-item");
 
   const id = Number(parentNode.id);
-  const task = tasks.find((task) => task.id === id);
-  task.checked = !task.checked;
+  const currentTask = tasks.find((task) => task.id === id); //obj
+  
+    currentTask.checked = !currentTask.checked;
+  
+// console.log("currentTask.checked",currentTask.checked);
+// console.log('tasks',tasks);
 
   const taskTitle = parentNode.querySelector("#taskInput");
   taskTitle.classList.toggle("list-item-task--done");
@@ -79,6 +102,8 @@ function editTask(event) {
     const inputEdit = parentNode.querySelector("#taskInput");
     inputEdit.toggleAttribute("readonly");
     inputEdit.classList.toggle("checkEdit");
+
+
 
     const descriptionEdit = parentNode.querySelector("#taskDescription");
     descriptionEdit.toggleAttribute("readonly");

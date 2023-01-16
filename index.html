@@ -28,10 +28,8 @@
             placeholder="Description"
             id="taskDescription"
           ></textarea>
-          <button class="form-btn-add-task button" id="add">Add</button>
-          
+          <button class="form-btn-add-task button" id="add">Add</button>      
         </form>
-        <button class="form-btn-reset-task"><i data-action="reset" class="bi-x-circle" id="resetAll"></i></button>
         <ul class="list" id="tasksList">
           <!-- <li class="list-item" key=${task.id}>
             <div class="list-item-main">
@@ -63,13 +61,12 @@
         <a class="sort" href="#" onclick="alert('sort')"
           ><i class="bi bi-filter"></i
         ></a>
-        <a class="trash" href="#" onclick="alert('reset list')"
+        <a class="trash" href="#" data-action="reset" class="bi-x-circle" id="resetAll"
           ><i class="bi bi-trash2"></i
         ></a>
       </footer>
     </div>
 
-    
     <script type="module" src= "./src/index.js"></script>
   </body>
 </html>
