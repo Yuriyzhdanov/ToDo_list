@@ -92,15 +92,33 @@ function editTask(event) {
 }
 
 function deleteTask(event) {
-  //DELETE
+
+function deletePostRequest(id) {
+   fetch(`http://localhost:3000/tasks/${id}`, {
+     method: "DELETE",
+     headers: {
+       "Content-Type": "application/json;charset=utf-8",
+     }
+   })
+     .then((response) => {
+       console.log("Delete:",id);
+       response.json();
+     })
+     .catch((error) => {
+       console.error("Error:",id );
+     });
+ }
+
   if (event.target.dataset.action !== "delete") return;
   const parentNode = event.target.closest(".list-item");
   const id = Number(parentNode.id);
 
-  tasks = tasks.filter((task) => task.id !== id);
-  if (confirm("want to delete?")) {
-    parentNode.remove();
-  }
+//   tasks = tasks.filter((task) => task.id !== id);
+//   if (confirm("want to delete?")) {
+//     parentNode.remove();
+//   }
+
+  deletePostRequest(id);
 }
 
 function deleteAllTasks() {
@@ -140,3 +158,4 @@ function renderTask() {
   }
   getResponse();
 }
+//onCheck 
