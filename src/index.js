@@ -1,4 +1,5 @@
 import isValidTextFields from "./isValidTextFields.js";
+import createPostRequest from "./fetchPost.js";
 
 const form = document.querySelector("#form");
 const titleInput = document.querySelector("#taskInput");
@@ -13,45 +14,27 @@ tasksList.addEventListener("click", editTask);
 tasksList.addEventListener("click", deleteTask);
 resetAll.addEventListener("click", deleteAllTasks);
 
-
 renderTask();
-
 
 function addTask(event) {
   event.preventDefault();
 
-  const newTask = {   //obj
+  const newTask = {
+    //obj
     id: Date.now(),
     title: titleInput.value,
     description: descriptionInput.value,
     checked: false,
   };
-
-function createPostRequest() {
-    fetch('http://localhost:3000/tasks',{
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(newTask)
-   })
-   .then((response) => response.json())
-   .then((newTask) => {
-     console.log('Success:', newTask);
-   })
-}
-
-createPostRequest();
-
-titleInput.value = "";
-descriptionInput.value = "";
   
-renderTask();
-}
+  createPostRequest(newTask);
 
+  titleInput.value = "";
+  descriptionInput.value = "";
+}
 
 function doneTask(event) {
-  //PUT 
+  //PUT
   if (event.target.dataset.action !== "done") return;
   const parentNode = event.target.closest(".list-item");
 
@@ -71,7 +54,7 @@ function doneTask(event) {
 }
 
 function editTask(event) {
-//PUT
+  //PUT
   if (event.target.dataset.action === "edit") {
     const parentNode = event.target.closest(".list-item");
     const inputEdit = parentNode.querySelector("#taskInput");
@@ -96,7 +79,6 @@ function editTask(event) {
         element.checked =
           parentNode.querySelectorAll(".bi-check-circle")[1] != undefined;
       }
-  
     });
     //   for (let i = 0; i < tasks.length; i++) {
     //     if (parseInt(parentNode.id) === tasks[i].id) {
@@ -110,7 +92,7 @@ function editTask(event) {
 }
 
 function deleteTask(event) {
-   //DELETE
+  //DELETE
   if (event.target.dataset.action !== "delete") return;
   const parentNode = event.target.closest(".list-item");
   const id = Number(parentNode.id);
@@ -122,26 +104,23 @@ function deleteTask(event) {
 }
 
 function deleteAllTasks() {
-   //DELETE
+  //DELETE
   tasksList.innerHTML = "";
   tasks = [];
 }
 
 function renderTask() {
-   //GET method
-   async function getResponse() {
-      const response = await fetch(
-         'http://localhost:3000/tasks',
-         {
-            method: 'GET',
-         }
-      );
+  //GET method
+  async function getResponse() {
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "GET",
+    });
 
-      const tasks = await response.json();
-      
-      tasksList.innerHTML = "";
-      tasks.forEach(function (task) {
-         const renderHTML = `
+    const tasks = await response.json();
+
+    tasksList.innerHTML = "";
+    tasks.forEach(function (task) {
+      const renderHTML = `
            <li id="${task.id}" class="list-item" >
                  <div class="list-item-main">
                        <a href="#" class="main-icons">
@@ -156,8 +135,8 @@ function renderTask() {
                placeholder="empty" class="list-item-description" id="taskDescription" value="${task.description}" readonly >
                  </div>
            </li>`;
-         tasksList.innerHTML += renderHTML;
-       });
-   }
- getResponse();
+      tasksList.innerHTML += renderHTML;
+    });
+  }
+  getResponse();
 }
