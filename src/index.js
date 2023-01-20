@@ -14,44 +14,41 @@ tasksList.addEventListener("click", deleteTask);
 resetAll.addEventListener("click", deleteAllTasks);
 
 
-
-//Post відправка даних
-// Put - обмін Get - отримати Delete -видалення 
-
-
-// console.log('JSON.stringify(data))',JSON.stringify(data));
-
-// JSON.parse(data);
-// let tasks = [
-//    {
-//       id: 122345,
-//     title:"test1",
-//     description: "test2",
-//     checked: false,
-//    }
-// ];
-
 renderTask();
 
+
 function addTask(event) {
-   //POST 
   event.preventDefault();
 
-  const newTask = {
+  const newTask = {   //obj
     id: Date.now(),
     title: titleInput.value,
     description: descriptionInput.value,
     checked: false,
   };
-  //   console.log(newTask);
 
-  tasks.push(newTask);
-
-  renderTask();
-
-  titleInput.value = "";
-  descriptionInput.value = "";
+function createPostRequest() {
+    fetch('http://localhost:3000/tasks',{
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(newTask)
+   })
+   .then((response) => response.json())
+   .then((newTask) => {
+     console.log('Success:', newTask);
+   })
 }
+
+createPostRequest();
+
+titleInput.value = "";
+descriptionInput.value = "";
+  
+renderTask();
+}
+
 
 function doneTask(event) {
   //PUT 
@@ -91,7 +88,6 @@ function editTask(event) {
     parentNode.querySelector(".list-item-description").value;
 
     tasks.forEach((element) => {
-      console.log(element);
       if (parseInt(parentNode.id) === element.id) {
         element.title = parentNode.querySelector(".list-item-task").value;
         element.description = parentNode.querySelector(
@@ -100,7 +96,7 @@ function editTask(event) {
         element.checked =
           parentNode.querySelectorAll(".bi-check-circle")[1] != undefined;
       }
-      // console.log("tasks", tasks);
+  
     });
     //   for (let i = 0; i < tasks.length; i++) {
     //     if (parseInt(parentNode.id) === tasks[i].id) {
@@ -131,7 +127,7 @@ function deleteAllTasks() {
   tasks = [];
 }
 
-function renderTask(tasks) {
+function renderTask() {
    //GET method
    async function getResponse() {
       const response = await fetch(
@@ -140,7 +136,8 @@ function renderTask(tasks) {
             method: 'GET',
          }
       );
-      const tasks = await response.json(); // Extracting data as a JSON Object from the response
+
+      const tasks = await response.json();
       
       tasksList.innerHTML = "";
       tasks.forEach(function (task) {
@@ -163,8 +160,4 @@ function renderTask(tasks) {
        });
    }
  getResponse();
- 
-  
-  
-
 }
