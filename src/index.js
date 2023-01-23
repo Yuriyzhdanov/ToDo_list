@@ -1,5 +1,9 @@
 import isValidTextFields from "./isValidTextFields.js";
-import createPostRequest from "./fetchPost.js";
+import postRequest from "./postRequest.js";
+// import getRequest from "./getRequest.js";
+import deleteRequest from "./deleteRequest.js";
+import fetchGETTasks from "./getRequest.js";
+
 
 const form = document.querySelector("#form");
 const titleInput = document.querySelector("#taskInput");
@@ -26,8 +30,8 @@ function addTask(event) {
     description: descriptionInput.value,
     checked: false,
   };
-  
-  createPostRequest(newTask);
+
+  postRequest(newTask);
 
   titleInput.value = "";
   descriptionInput.value = "";
@@ -55,6 +59,16 @@ function doneTask(event) {
 
 function editTask(event) {
   //PUT
+  //   function putRequest(id) {
+  // const requestOptions = {
+  //     method: 'PUT',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify({ title: 'Fetch PUT Request Example' })
+  // };
+  // fetch(`http://localhost:3000/tasks/${id}`, requestOptions)
+  //     .then(response => response.json())
+  //     .then(data => element.innerHTML = data.updatedAt );
+  //  }
   if (event.target.dataset.action === "edit") {
     const parentNode = event.target.closest(".list-item");
     const inputEdit = parentNode.querySelector("#taskInput");
@@ -80,45 +94,15 @@ function editTask(event) {
           parentNode.querySelectorAll(".bi-check-circle")[1] != undefined;
       }
     });
-    //   for (let i = 0; i < tasks.length; i++) {
-    //     if (parseInt(parentNode.id) === tasks[i].id) {
-    //         tasks[i].title = parentNode.querySelector('.list-item-task').value;
-    //         tasks[i].description = parentNode.querySelector('.list-item-description').value;
-    //         tasks[i].checked = parentNode.querySelectorAll('.bi-check-circle')[1] != undefined;
-    //         console.log("tseg");
-    //     }
-    // }
   }
+  //   putRequest(id);
 }
 
 function deleteTask(event) {
-
-function deletePostRequest(id) {
-   fetch(`http://localhost:3000/tasks/${id}`, {
-     method: "DELETE",
-     headers: {
-       "Content-Type": "application/json;charset=utf-8",
-     }
-   })
-     .then((response) => {
-       console.log("Delete:",id);
-       response.json();
-     })
-     .catch((error) => {
-       console.error("Error:",id );
-     });
- }
-
   if (event.target.dataset.action !== "delete") return;
   const parentNode = event.target.closest(".list-item");
   const id = Number(parentNode.id);
-
-//   tasks = tasks.filter((task) => task.id !== id);
-//   if (confirm("want to delete?")) {
-//     parentNode.remove();
-//   }
-
-  deletePostRequest(id);
+  deleteRequest(id);
 }
 
 function deleteAllTasks() {
@@ -128,34 +112,26 @@ function deleteAllTasks() {
 }
 
 function renderTask() {
-  //GET method
-  async function getResponse() {
-    const response = await fetch("http://localhost:3000/tasks", {
-      method: "GET",
-    });
-
-    const tasks = await response.json();
-
-    tasksList.innerHTML = "";
-    tasks.forEach(function (task) {
+  fetchGETTasks().then(tasks => {
+  tasksList.innerHTML = "";
+  
+    tasks && tasks.forEach(function (task) {   
       const renderHTML = `
-           <li id="${task.id}" class="list-item" >
-                 <div class="list-item-main">
-                       <a href="#" class="main-icons">
-                       <i class="bi-check-circle"></i>
-                       <i class="bi-circle" data-action="done" id="checked"></i>
-                       <i class="bi-pen" data-action="edit" id="edit"></i>
-                       <i class="bi-trash3" data-action="delete"></i>
-                       </a>
-                   <input type="text"
-             placeholder="empty" class="list-item-task" id="taskInput" value="${task.title}" readonly >
-                   <input type="text"
-               placeholder="empty" class="list-item-description" id="taskDescription" value="${task.description}" readonly >
-                 </div>
-           </li>`;
+              <li id="${task.id}" class="list-item" >
+                    <div class="list-item-main">
+                          <a href="#" class="main-icons">
+                          <i class="bi-check-circle"></i>
+                          <i class="bi-circle" data-action="done" id="checked"></i>
+                          <i class="bi-pen" data-action="edit" id="edit"></i>
+                          <i class="bi-trash3" data-action="delete"></i>
+                          </a>
+                      <input type="text"
+                placeholder="empty" class="list-item-task" id="taskInput" value="${task.title}" readonly >
+                      <input type="text"
+                  placeholder="empty" class="list-item-description" id="taskDescription" value="${task.description}" readonly >
+                    </div>
+              </li>`;
       tasksList.innerHTML += renderHTML;
     });
+  });
   }
-  getResponse();
-}
-//onCheck 

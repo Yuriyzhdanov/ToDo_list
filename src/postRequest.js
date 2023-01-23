@@ -1,5 +1,5 @@
 
-function createPostRequest(newTask) {
+function postRequest(newTask) {
    fetch("http://localhost:3000/tasks", {
      method: "POST",
      headers: {
@@ -15,4 +15,6 @@ function createPostRequest(newTask) {
        console.error("Error:", error);
      });
  }
- export default createPostRequest;
+
+ 
+ export default postRequest; 
