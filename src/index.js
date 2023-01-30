@@ -1,9 +1,8 @@
 import isValidTextFields from "./isValidTextFields.js";
 import postRequest from "./postRequest.js";
-// import getRequest from "./getRequest.js";
 import deleteRequest from "./deleteRequest.js";
 import fetchGETTasks from "./getRequest.js";
-
+import fetchAPI from "./fetchAPI.js"
 
 const form = document.querySelector("#form");
 const titleInput = document.querySelector("#taskInput");
@@ -17,6 +16,8 @@ tasksList.addEventListener("click", doneTask);
 tasksList.addEventListener("click", editTask);
 tasksList.addEventListener("click", deleteTask);
 resetAll.addEventListener("click", deleteAllTasks);
+
+
 
 renderTask();
 
@@ -57,45 +58,61 @@ function doneTask(event) {
   doneTask.classList.toggle("bi-check-circle");
 }
 
+// async function putRequest(tasks){
+//    const response = await fetch("http://localhost:3000/tasks", {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(tasks)
+//     });
+//     const tasks = await response.json();
+//     console.log('data',tasks);
+//    }
+//    console.log('putRequest(tasks)',putRequest());
+
 function editTask(event) {
-  //PUT
-  //   function putRequest(id) {
-  // const requestOptions = {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ title: 'Fetch PUT Request Example' })
-  // };
-  // fetch(`http://localhost:3000/tasks/${id}`, requestOptions)
-  //     .then(response => response.json())
-  //     .then(data => element.innerHTML = data.updatedAt );
-  //  }
   if (event.target.dataset.action === "edit") {
     const parentNode = event.target.closest(".list-item");
     const inputEdit = parentNode.querySelector("#taskInput");
 
-    inputEdit.toggleAttribute("readonly");
+
+    inputEdit.toggleAttribute("readonly") ; 
     inputEdit.classList.toggle("checkEdit");
 
     const descriptionEdit = parentNode.querySelector("#taskDescription");
 
-    descriptionEdit.toggleAttribute("readonly");
-    descriptionEdit.classList.toggle("checkEdit");
-
+    //  descriptionEdit.toggleAttribute("readonly");
+    //  descriptionEdit.classList.toggle("checkEdit");
+    
     parentNode.querySelector(".list-item-task").value;
     parentNode.querySelector(".list-item-description").value;
 
-    tasks.forEach((element) => {
-      if (parseInt(parentNode.id) === element.id) {
-        element.title = parentNode.querySelector(".list-item-task").value;
-        element.description = parentNode.querySelector(
-          ".list-item-description"
-        ).value;
-        element.checked =
-          parentNode.querySelectorAll(".bi-check-circle")[1] != undefined;
-      }
-    });
+    const id = Number(parentNode.id);
+
+    const editedTask = {
+      title: parentNode.querySelector(".list-item-task").value,
+      description: parentNode.querySelector(".list-item-description").value,
+    };
+
+    if (inputEdit.readOnly) {
+      updatePutRequest(id, editedTask);
+    }
+    
   }
-  //   putRequest(id);
+}
+//
+
+async function updatePutRequest(id, obj) {
+  return fetch(`http://localhost:3000/tasks/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(obj),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => data);
 }
 
 function deleteTask(event) {
@@ -106,16 +123,14 @@ function deleteTask(event) {
 }
 
 function deleteAllTasks() {
-  //DELETE
+  //DELETE method
   tasksList.innerHTML = "";
-  tasks = [];
 }
 
 function renderTask() {
-  fetchGETTasks().then(tasks => {
-  tasksList.innerHTML = "";
-  
-    tasks && tasks.forEach(function (task) {   
+  fetchGETTasks().then((tasks) => {
+    tasksList.innerHTML = "";
+    tasks.forEach(function (task) {
       const renderHTML = `
               <li id="${task.id}" class="list-item" >
                     <div class="list-item-main">
@@ -128,10 +143,10 @@ function renderTask() {
                       <input type="text"
                 placeholder="empty" class="list-item-task" id="taskInput" value="${task.title}" readonly >
                       <input type="text"
-                  placeholder="empty" class="list-item-description" id="taskDescription" value="${task.description}" readonly >
+                  placeholder="empty" class="list-item-description" id="taskDescription" value="${task.description}"  >
                     </div>
               </li>`;
       tasksList.innerHTML += renderHTML;
     });
   });
-  }
+}

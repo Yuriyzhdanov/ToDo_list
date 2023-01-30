@@ -1,5 +1,5 @@
 function deleteRequest(id) {
-   fetch(`http://localhost:3000/tasks/${id}`, {
+   const request = fetch(`http://localhost:3000/tasks/${id}`, {
      method: "DELETE",
      headers: {
        "Content-Type": "application/json;charset=utf-8",
