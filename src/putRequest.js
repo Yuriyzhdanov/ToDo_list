@@ -1,17 +1,13 @@
-async function fetchGetTasks() {
-  const response = await fetch("http://localhost:3000/tasks", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify(editedTask)
-  })
-  .than(tasks => response.json())
-  .than(data => console.log('data')
-  .catch(error => console.log('error')
-  )
-  )
-}
+async function putRequest(id, obj) {
+   return fetch(`http://localhost:3000/tasks/${id}`, {
+     method: "PUT",
+     body: JSON.stringify(obj),
+     headers: {
+       "Content-type": "application/json; charset=UTF-8",
+     },
+   })
+     .then((res) => res.json())
+     .then((data) => console.log('data', data));
+ }
 
-
-export default fetchGetTasks;
+ export default putRequest;

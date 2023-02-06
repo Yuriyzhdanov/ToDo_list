@@ -1,8 +1,9 @@
 import isValidTextFields from "./isValidTextFields.js";
 import postRequest from "./postRequest.js";
+import putRequest from "./putRequest.js";
 import deleteRequest from "./deleteRequest.js";
 import fetchGETTasks from "./getRequest.js";
-import fetchAPI from "./fetchAPI.js"
+// import fetchAPI from "./fetchAPI.js";
 
 const form = document.querySelector("#form");
 const titleInput = document.querySelector("#taskInput");
@@ -17,15 +18,12 @@ tasksList.addEventListener("click", editTask);
 tasksList.addEventListener("click", deleteTask);
 resetAll.addEventListener("click", deleteAllTasks);
 
-
-
 renderTask();
 
 function addTask(event) {
   event.preventDefault();
 
   const newTask = {
-    //obj
     id: Date.now(),
     title: titleInput.value,
     description: descriptionInput.value,
@@ -39,52 +37,54 @@ function addTask(event) {
 }
 
 function doneTask(event) {
-  //PUT
-  if (event.target.dataset.action !== "done") return;
-  const parentNode = event.target.closest(".list-item");
-
-  const id = Number(parentNode.id);
-  const currentTask = tasks.find((task) => task.id === id); //obj
-
-  currentTask.checked = !currentTask.checked;
-
-  const taskTitle = parentNode.querySelector("#taskInput");
-  taskTitle.classList.toggle("list-item-task--done");
-
-  const taskDescription = parentNode.querySelector("#taskDescription");
-  taskDescription.classList.toggle("list-item-task--done");
-
-  const doneTask = parentNode.querySelector("#checked");
-  doneTask.classList.toggle("bi-check-circle");
-}
-
-// async function putRequest(tasks){
-//    const response = await fetch("http://localhost:3000/tasks", {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(tasks)
-//     });
-//     const tasks = await response.json();
-//     console.log('data',tasks);
-//    }
-//    console.log('putRequest(tasks)',putRequest());
+   //PUT
+     if (event.target.dataset.action !== "done") return;
+     const parentNode = event.target.closest(".list-item");
+ 
+     const taskTitle = parentNode.querySelector("#taskInput");
+ //      taskTitle.classList.toggle("list-item-task--done");
+ 
+     const taskDescription = parentNode.querySelector("#taskDescription");
+ //      taskDescription.classList.toggle("list-item-task--done");
+ 
+     const doneTask = parentNode.querySelector("#checked");
+ //      doneTask.classList.toggle("bi-check-circle");
+ 
+ if(taskTitle.classList.contains('list-item-task--done'))  
+ {
+   var complete = {checked: false};
+ } else {
+   var complete = {checked: true };
+ }
+     console.log ('complete:', complete);
+     const id = Number(parentNode.id);
+    
+   function putRequestCheck(id, complete) {
+     return fetch(`http://localhost:3000/tasks/${id}`, {
+       method: "PATCH",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify(complete),
+     })
+       .then((res) => res.json())
+       .then((data) => console.log(data));
+   }
+   putRequestCheck(id, complete);
+   setTimeout(() => renderTask(), 300);
+ }
 
 function editTask(event) {
   if (event.target.dataset.action === "edit") {
     const parentNode = event.target.closest(".list-item");
     const inputEdit = parentNode.querySelector("#taskInput");
 
-
-    inputEdit.toggleAttribute("readonly") ; 
+    inputEdit.toggleAttribute("readonly");
     inputEdit.classList.toggle("checkEdit");
 
     const descriptionEdit = parentNode.querySelector("#taskDescription");
 
-    //  descriptionEdit.toggleAttribute("readonly");
-    //  descriptionEdit.classList.toggle("checkEdit");
-    
+    descriptionEdit.toggleAttribute("readonly");
+    descriptionEdit.classList.toggle("checkEdit");
+
     parentNode.querySelector(".list-item-task").value;
     parentNode.querySelector(".list-item-description").value;
 
@@ -96,23 +96,10 @@ function editTask(event) {
     };
 
     if (inputEdit.readOnly) {
-      updatePutRequest(id, editedTask);
+      putRequest(id, editedTask);
+      // fetchAPI("http://localhost:3000/tasks/1675447337075", "PUT", editedTask);
     }
-    
   }
-}
-//
-
-async function updatePutRequest(id, obj) {
-  return fetch(`http://localhost:3000/tasks/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(obj),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => data);
 }
 
 function deleteTask(event) {
@@ -123,8 +110,24 @@ function deleteTask(event) {
 }
 
 function deleteAllTasks() {
-  //DELETE method
   tasksList.innerHTML = "";
+
+  function deleteAllRequest() {
+    fetch("http://localhost:3000/tasks", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(tasks),
+    })
+      .then((response) => {
+        response.json();
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+  deleteAllRequest();
 }
 
 function renderTask() {
@@ -132,21 +135,22 @@ function renderTask() {
     tasksList.innerHTML = "";
     tasks.forEach(function (task) {
       const renderHTML = `
-              <li id="${task.id}" class="list-item" >
-                    <div class="list-item-main">
-                          <a href="#" class="main-icons">
-                          <i class="bi-check-circle"></i>
-                          <i class="bi-circle" data-action="done" id="checked"></i>
-                          <i class="bi-pen" data-action="edit" id="edit"></i>
-                          <i class="bi-trash3" data-action="delete"></i>
-                          </a>
-                      <input type="text"
-                placeholder="empty" class="list-item-task" id="taskInput" value="${task.title}" readonly >
-                      <input type="text"
-                  placeholder="empty" class="list-item-description" id="taskDescription" value="${task.description}"  >
-                    </div>
-              </li>`;
-      tasksList.innerHTML += renderHTML;
-    });
-  });
+      <li id="${task.id}" class="list-item" >
+            <div class="list-item-main">
+                  <a href="#" class="main-icons">
+                  <i class="bi-check-circle"></i>
+                  <i class=" bi-circle ${task.checked ? "bi-check-circle" : ''}" data-action="done" id="checked"></i>
+                  <i class="bi-pen" data-action="edit" id="edit"></i>
+                  <i class="bi-trash3" data-action="delete"></i>
+                  </a>
+              <input type="text"
+        placeholder="empty" class="list-item-task ${task.checked ? "list-item-task--done" : ''}" id="taskInput" value="${task.title}" readonly >
+              <input type="text"
+          placeholder="empty" class="list-item-description ${task.checked ? "list-item-task--done" : ''}" id="taskDescription" value="${task.description}" readonly >
+            </div>
+      </li>`;
+tasksList.innerHTML += renderHTML;
+});
+});
 }
+
