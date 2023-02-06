@@ -1,16 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": 1675694645052,
-      "title": "sdf",
-      "description": "dsf",
-      "checked": false
-    },
-    {
-      "id": 1675700316853,
-      "title": "dv",
-      "description": "dv",
-      "checked": true
-    }
-  ]
+  "tasks": []
 }

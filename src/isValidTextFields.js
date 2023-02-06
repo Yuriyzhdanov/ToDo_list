@@ -1,23 +1,23 @@
 //import style message
 
-function isValidTextFields ( ...args) {
-
-  return [...args].every(x => {
-      if( x === ""){
-         return console.error("Field is empty, please add words")
-      }
-      if( x.length <= 2){
-          return console.error("Longer word")
-      }
-      if( x.length >= 25){
-        return console.error("Shorter word")
-      }
-      if(typeof x !== "string"){
-          return console.error("Write Text")
-      }
-        return true;
-        
-  })
+function isValidTextFields(...args) {
+  let message ;
+  [...args].every((x) => {
+    if (x === "") 
+      message = "Field is empty, please add words";
+   
+    if (x.length <= 2) 
+      message = "Longer word";
+    
+    if (x.length >= 25) 
+      message = "Shorter word";
+    
+    if (typeof x !== "string") 
+       message = "Write Text";  
+    
+  }
+ 
+  );
+  return message;
 }
-
 export default isValidTextFields;
